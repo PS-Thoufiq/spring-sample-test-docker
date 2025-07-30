@@ -1,0 +1,62 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - MONGODB_URI=mongodb://mongodb:27017/studentdb
+    depends_on:
+      - mongodb
+    networks:
+      - spring-network
+  app-qa:
+    build: .
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=qa
+      - MONGODB_QA_URI=mongodb://mongodb-qa:27017/qa_db
+    depends_on:
+      - mongodb-qa
+    networks:
+      - spring-network
+  app-preprod:
+    build: .
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=preprod
+      - MONGODB_PREPROD_URI=mongodb://mongodb-preprod:27017/preprod_db
+    depends_on:
+      - mongodb-preprod
+    networks:
+      - spring-network
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=studentdb
+    networks:
+      - spring-network
+  mongodb-qa:
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=qa_db
+    networks:
+      - spring-network
+  mongodb-preprod:
+    image: mongo:latest
+    ports:
+      - "27019:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=preprod_db
+    networks:
+      - spring-network
+networks:
+  spring-network:
+    driver: bridge
