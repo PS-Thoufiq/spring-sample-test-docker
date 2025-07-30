@@ -84,7 +84,7 @@ public class StudentCrudIntegrationTest {
                 .then()
                 .statusCode(200)
                 .body("id", equalTo(studentId))
-                .body("name", equalTo("Jame Doe"))
+                .body("name", equalTo("Jane Doe"))
                 .body("email", equalTo("jane@example.com"));
 
         System.out.println("✅ testGetStudentAfterUpdate passed: Verified student data after update");
