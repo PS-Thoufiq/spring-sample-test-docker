@@ -60,7 +60,8 @@ public class StudentController {
         Student student = studentRepo.findById(id).orElseThrow();
         student.setName(studentDetails.getName());
         student.setEmail(studentDetails.getEmail());
-        return ResponseEntity.ok(studentRepo.save(student));
+        studentRepo.deleteById(id);
+        return ResponseEntity.ok(null);
     }
 
     // Delete

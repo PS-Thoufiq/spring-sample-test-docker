@@ -90,29 +90,29 @@ public class StudentCrudIntegrationTest {
         System.out.println("✅ testGetStudentAfterUpdate passed: Verified student data after update");
     }
 
-    // @Test
-    // @Order(5)
-    // void testDeleteStudent() {
-    //     RestAssured.given()
-    //             .when()
-    //             .delete("/students/{id}", studentId)
-    //             .then()
-    //             .statusCode(204);
-    //
-    //     System.out.println("✅ testDeleteStudent passed: Student deleted successfully");
-    // }
+     @Test
+     @Order(5)
+     void testDeleteStudent() {
+         RestAssured.given()
+                 .when()
+                 .delete("/students/{id}", studentId)
+                 .then()
+                 .statusCode(204);
 
-    // @Test
-    // @Order(6)
-    // void testGetStudentAfterDelete() {
-    //     RestAssured.given()
-    //             .when()
-    //             .get("/students/{id}", studentId)
-    //             .then()
-    //             .statusCode(404);
-    //
-    //     System.out.println("✅ testGetStudentAfterDelete passed: Confirmed student not found after deletion");
-    // }
+         System.out.println("✅ testDeleteStudent passed: Student deleted successfully");
+     }
+
+     @Test
+     @Order(6)
+     void testGetStudentAfterDelete() {
+         RestAssured.given()
+                 .when()
+                 .get("/students/{id}", studentId)
+                 .then()
+                 .statusCode(404);
+
+         System.out.println("✅ testGetStudentAfterDelete passed: Confirmed student not found after deletion");
+     }
 
     // Retry mechanism for transient connection issues
     private ValidatableResponse retryRequest(java.util.function.Supplier<ValidatableResponse> request) {
