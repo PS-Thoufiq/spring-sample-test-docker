@@ -24,7 +24,7 @@ public class StudentController {
     @GetMapping("/health")
     public ResponseEntity<Object> health() {
         System.out.println("Health check endpoint called. Stage: `${stage}`");
-        return ResponseEntity.ok(Map.of("status", "UP", "stage", stage));
+        return ResponseEntity.ok(Map.of("status", "Live", "stage", stage));
     }
 
     // Create
