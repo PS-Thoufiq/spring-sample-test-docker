@@ -79,7 +79,7 @@ pipeline {
                         for (int i = 0; i < maxRetries; i++) {
                             try {
                                 bat """
-                                    curl -f http://localhost:${QA_PORT}/students/health | findstr \"\\\"status\\\":\\\"UP\\\"\" | findstr \"\\\"stage\\\":\\\"qa\\\"\" || exit 1
+                                    curl -f http://localhost:${QA_PORT}/students/health | findstr \"\\\"status\\\":\\\"Live\\\"\" | findstr \"\\\"stage\\\":\\\"qa\\\"\" || exit 1
                                 """
                                 success = true
                                 break
