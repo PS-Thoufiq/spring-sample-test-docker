@@ -54,15 +54,16 @@ public class StudentController {
     }
 
     // Update
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateStudent(@PathVariable String id, @RequestBody Student studentDetails) {
-        System.out.println("Updating student with ID: " + id + " with details: " + studentDetails);
-        Student student = studentRepo.findById(id).orElseThrow();
-        student.setName(studentDetails.getName());
-        student.setEmail(studentDetails.getEmail());
-        studentRepo.deleteById(id);
-        return ResponseEntity.ok(null);
-    }
+  @PutMapping("/{id}")
+public ResponseEntity<Student> updateStudent(@PathVariable String id, @RequestBody Student studentDetails) {
+    System.out.println("Updating student with ID: " + id + " with details: " + studentDetails);
+    Student student = studentRepo.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+    student.setName(studentDetails.getName());
+    student.setEmail(studentDetails.getEmail());
+    Student updatedStudent = studentRepo.save(student);
+    return ResponseEntity.ok(updatedStudent);
+}
+
 
     // Delete
     @DeleteMapping("/{id}")
